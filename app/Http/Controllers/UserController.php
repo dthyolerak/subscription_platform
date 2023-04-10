@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -44,5 +45,23 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    
+    // UserController methods
+    public function subscribe(Request $request, User $user)
+    {
+        $request->validate([
+            'website_id' => 'required|exists:websites,id'
+        ]);
+
+        $subscription = $user->subscriptions()->create([
+            'website_id' => $request->input('website_id')
+        ]);
+
+        return response()->json([
+            'message' => 'User subscribed successfully',
+            'subscription' => $subscription
+        ]);
     }
 }

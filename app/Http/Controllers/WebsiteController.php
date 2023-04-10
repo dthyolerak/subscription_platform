@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendPostNotification;
 use App\Models\Website;
 use Illuminate\Http\Request;
 
